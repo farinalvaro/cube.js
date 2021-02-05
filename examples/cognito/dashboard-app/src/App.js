@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { CubeProvider } from '@cubejs-client/react';
 import Header from './components/Header';
 import { Amplify, Auth } from 'aws-amplify';
-import { withAuthenticator } from 'aws-amplify-react';
+import { AmplifyTheme, withAuthenticator, ConfirmSignIn, ConfirmSignUp, ForgotPassword, RequireNewPassword, SignIn, SignUp, VerifyContact } from 'aws-amplify-react';
 import { initCubeClient } from './init-cubejs-api';
 
 import config from './auth_config';
@@ -28,22 +28,34 @@ const AppLayout = ({ children }) => {
   );
 };
 
-function getToken() {
-  return Auth.currentSession()
-    .then(session => session)
-    .catch(err => console.log(err));
-}
+const MyTheme = {
+  ...AmplifyTheme,
+};
 
-const App = ({ children, authData, authState }) => {
-  const [cubejsApi, setCubejsApi] = useState(null);
+const App = ({ children }) => {
+  const Page = withAuthenticator(
+    ({ authData }) => (
+      <CubeProvider cubejsApi={initCubeClient(authData.signInUserSession.accessToken.getJwtToken())}>
+        <>
+          {children}
+        </>
+      </CubeProvider>
+    ),
+    false,
+    [
+      <SignIn />,
+      <ConfirmSignIn/>,
+      <VerifyContact/>,
+      <SignUp/>,
+      <ConfirmSignUp/>,
+      <ForgotPassword/>,
+      <RequireNewPassword />
+    ],
+    null,
+    {
 
-  const Page = withAuthenticator(({ authData }) => (
-    <CubeProvider cubejsApi={initCubeClient(authData.signInUserSession.accessToken.getJwtToken())}>
-      <>
-        {children}
-      </>
-    </CubeProvider>
-  ));
+    }
+  );
 
   return (
     <AppLayout>

@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import { HashRouter as Router, Route } from "react-router-dom";
+
+import { AmplifyProvider } from "./libs/amplify";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { HashRouter as Router, Route } from "react-router-dom";
 import DashboardPage from "./pages/DashboardPage";
-import { AmplifyProvider } from "./libs/amplify";
+import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import './App.css';
 import './body.css';
-import { Card } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { CubeProvider } from '@cubejs-client/react';
 import Header from './components/Header';
 import { Amplify, Auth } from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react';
-import config from './auth_config';
 import { initCubeClient } from './init-cubejs-api';
+
+import config from './auth_config';
 
 Amplify.configure(config);
 

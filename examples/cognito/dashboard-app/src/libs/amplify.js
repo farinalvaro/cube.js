@@ -48,8 +48,7 @@ export const AmplifyProvider = ({ children }) => {
     <AmplifyContext.Provider value={{
       authData,
       authState,
-      // isAuthorized: authState !== 'signIn',
-      isAuthorized: true,
+      isAuthorized: ['authState'].includes(authState),
       logout: () => Auth.signOut({ global: false, }),
     }}>
       {children}

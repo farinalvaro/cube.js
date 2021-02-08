@@ -144,3 +144,12 @@ server {
   }
 }
 ```
+
+## Set up health checks
+
+Configure your monitoring service of choice to use the
+[`/readyz`][ref-api-readyz] and [`/livez`][ref-api-livez] API endpoints so you
+can check on the Cube.js deployment's health and be alerted to any issues.
+
+[ref-api-readyz]: /rest-api#api-reference-readyz
+[ref-api-livez]: /rest-api#api-reference-livez
